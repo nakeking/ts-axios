@@ -1,15 +1,15 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const mutipart = require('connect-multiparty')
-const atob = require('atob')
+// const cookieParser = require('cookie-parser')
+// const mutipart = require('connect-multiparty')
+// const atob = require('atob')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
 const path = require('path')
 
-require('./server2')
+// require('./server2')
 
 const app = express()
 const complier = webpack(WebpackConfig)
@@ -48,6 +48,8 @@ const router = express.Router()
 
 registerSimpleRouter()
 
+registerBaseRouter()
+
 app.use(router)
 
 const port = process.env.PORT || 8080
@@ -55,11 +57,25 @@ module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
 })
 
-// ============ 路由 ==============================
+// ============ 接口 ==============================
 function registerSimpleRouter() {
   router.get('/simple/get', function (req, res) {
     res.json({
-      msg: 'hello world'
+      msg: 'hello simple'
     })
+  })
+}
+
+function registerBaseRouter() {
+  router.get('/base/get', function (req, res) {
+    res.json(req.query)
+  })
+
+  router.post('/base/post', function(req, res) {
+    res.json(req.body)
+  })
+
+  router.post('/base/buffer', function(req, res) {
+    console.log(req.body);
   })
 }

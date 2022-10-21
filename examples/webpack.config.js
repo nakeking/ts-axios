@@ -62,6 +62,6 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NodeEnvironmentPlugin()
+    // new webpack.NodeEnvironmentPlugin()
   ]
 }
