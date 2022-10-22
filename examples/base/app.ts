@@ -85,3 +85,26 @@ axios({
     url: '/base/post',
     data: searchParams
 })
+
+axios({
+    method: 'POST',
+    url: '/base/post',
+    data: {
+        a: 1,
+        b: 2
+    }
+}).then(res => {
+    console.log(res);
+})
+
+axios({
+    method: 'POST',
+    url: '/base/post',
+    responseType: 'json',
+    data: {
+        a: 3,
+        b: 4
+    }
+}).then(res => {
+    console.log(res);
+})

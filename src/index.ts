@@ -1,13 +1,13 @@
 import xhr from './xhr'
-import { AxiosRequestConfig } from './types'
+import { AxiosRequestConfig, AxiosPremise } from './types'
 
 import { buildURL } from './helpers/url'
 import { transFormRequest } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
-function axios(config: AxiosRequestConfig): void {
+function axios(config: AxiosRequestConfig): AxiosPremise {
   processConfig(config)
-  xhr(config)
+  return xhr(config)
 }
 
 /**
