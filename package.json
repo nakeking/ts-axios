@@ -33,10 +33,6 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-<<<<<<< HEAD
-=======
-    "postinstall": "ts-node tools/init",
->>>>>>> fa6f7770a7dff69f6ed52e1775092ae18b0bfb4e
     "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {
@@ -124,7 +120,6 @@
     "tslint-config-standard": "^8.0.1",
     "tslint-loader": "^3.5.4",
     "typedoc": "^0.12.0",
-<<<<<<< HEAD
     "typescript": "^4.8.4",
     "webpack": "^5.74.0",
     "webpack-dev-middleware": "^5.3.3",
@@ -134,11 +129,3 @@
     "@types/estree": "^0.0.50"
   }
 }
-=======
-    "typescript": "^3.4.5",
-    "webpack": "^5.74.0",
-    "webpack-dev-middleware": "^5.3.3",
-    "webpack-hot-middleware": "^2.25.2"
-  }
-}
->>>>>>> fa6f7770a7dff69f6ed52e1775092ae18b0bfb4e
