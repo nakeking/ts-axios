@@ -29,3 +29,24 @@ axios.post('/extend/post', {msg: 'post'})
 axios.put('/extend/put', {msg: 'put'})
 
 axios.patch('/extend/patch', {msg: 'patch'})
+
+interface ResponseData<T> {
+    code: number
+    result: T
+    message: string
+}
+
+interface User {
+    name: string,
+    age: number
+}
+
+async function getUser() {
+    let user = await axios.get<ResponseData<User>>('/extend/user')
+
+    if(user) {
+        console.log(user.data.result.age);
+    }
+}
+
+getUser();
