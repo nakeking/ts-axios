@@ -52,6 +52,8 @@ registerBaseRouter()
 
 registerErrorRouter()
 
+registerExtendRouter()
+
 app.use(router)
 
 const port = process.env.PORT || 8080
@@ -100,5 +102,35 @@ function registerErrorRouter() {
         msg: 'hello world'
       })
     }, 3000)
+  })
+}
+
+function registerExtendRouter() {
+  router.get('/extend/get', function (req, res) {
+    res.json(req.query)
+  })
+
+  router.options('/extend/options', function(req, res) {
+    res.json(req.query)
+  })
+
+  router.head('/extend/head', function(req, res) {
+    console.log(req.query);
+  })
+
+  router.delete('/extend/delete', function(req, res) {
+    console.log(req.query);
+  })
+
+  router.post('/extend/post', function(req, res) {
+    res.json(req.body)
+  })
+
+  router.put('/extend/put', function(req, res) {
+    res.json(req.body)
+  })
+
+  router.patch('/extend/patch', function(req, res) {
+    res.json(req.body)
   })
 }

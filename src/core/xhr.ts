@@ -1,9 +1,9 @@
-import { AxiosRequestConfig, AxiosPremise, AxiosResponse } from './types'
-import { parseHeaders } from './helpers/headers'
-import { transFormResponse } from './helpers/data'
-import { createError } from './helpers/error'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
+import { parseHeaders } from '../helpers/headers'
+import { transFormResponse } from '../helpers/data'
+import { createError } from '../helpers/error'
 
-export default function xhr(config: AxiosRequestConfig): AxiosPremise {
+export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
     const { data = null, url, method = 'get', headers, timeout, responseType } = config
 
@@ -17,7 +17,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPremise {
       request.responseType = responseType
     }
 
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true)
 
     /**
      * 请求响应成功监听事件
