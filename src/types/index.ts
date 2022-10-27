@@ -16,6 +16,9 @@ export type Methods =
   | 'patch'
   | 'PATCH'
 
+/**
+ * request 参数类型接口
+ */
 export interface AxiosRequestConfig {
   url?: string
   method?: Methods
@@ -27,7 +30,8 @@ export interface AxiosRequestConfig {
   responseType?: XMLHttpRequestResponseType
 }
 
-export interface AxiosResponse<T = unknown> {
+// response 请求返回值类型接口
+export interface AxiosResponse<T = any> {
   data: T
   status: number
   statusText: string
@@ -36,8 +40,9 @@ export interface AxiosResponse<T = unknown> {
   request: any
 }
 
-export interface AxiosPromise<T = unknown> extends Promise<AxiosResponse<T>> {}
+export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
 
+// 接口错误信息增强
 export interface AxiosError extends Error {
   isAxiosError: boolean
   config: AxiosRequestConfig
@@ -46,7 +51,13 @@ export interface AxiosError extends Error {
   response?: AxiosResponse
 }
 
+// axios接口扩展
 export interface Axios {
+  interceptors: {
+    request: AxiosInterceptorManager<AxiosRequestConfig>
+    response: AxiosInterceptorManager<AxiosResponse>
+  }
+
   request<T>(config: AxiosRequestConfig): AxiosPromise<T>
 
   get<T>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -68,4 +79,19 @@ export interface AxiosInstance extends Axios {
   <T>(config: AxiosRequestConfig): AxiosPromise<T>
 
   (url: string, config?: AxiosRequestConfig): AxiosPromise
+}
+
+// interceptor axios接口拦截器
+export interface AxiosInterceptorManager<T> {
+  use(resolved: ResolveFn<T>, rejected?: RejectedFn): number
+
+  eject(id: number): void
+}
+
+export interface ResolveFn<T> {
+  (val: T): T | Promise<T>
+}
+
+export interface RejectedFn {
+  (error: any): any
 }

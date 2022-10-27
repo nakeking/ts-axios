@@ -8,14 +8,6 @@ axios({
     }
 })
 
-axios.request({
-    url: '/extend/post',
-    method: 'post',
-    data: {
-        msg: 'hello'
-    }
-})
-
 axios.get('/extend/get')
 
 axios.options('/extend/options')
@@ -37,7 +29,7 @@ interface ResponseData<T> {
 }
 
 interface User {
-    name: string,
+    msg: string,
     age: number
 }
 
