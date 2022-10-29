@@ -85,6 +85,10 @@ export interface AxiosInstance extends Axios {
   (url: string, config?: AxiosRequestConfig): AxiosPromise
 }
 
+export interface AxiosStatic extends AxiosInstance {
+  create(confi?: AxiosRequestConfig): AxiosInstance
+}
+
 // interceptor axios接口拦截器
 export interface AxiosInterceptorManager<T> {
   use(resolved: ResolveFn<T>, rejected?: RejectedFn): number
