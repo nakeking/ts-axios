@@ -19,7 +19,7 @@ axios.interceptors.response.use((res) => {
 })
 
 axios.request({
-    url: '/extend/post',
+    url: '/interceptor/post',
     method: 'post',
     headers: {
         test: '1'

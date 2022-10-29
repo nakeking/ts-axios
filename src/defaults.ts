@@ -10,7 +10,7 @@ const defaults: AxiosRequestConfig = {
   }
 }
 
-const methodsNoData = ['delete', 'get', 'head', 'option']
+const methodsNoData = ['delete', 'get', 'head', 'options']
 
 methodsNoData.forEach(method => {
   defaults.headers[method] = {}

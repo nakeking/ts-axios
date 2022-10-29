@@ -46,8 +46,6 @@ export function buildURL(url: string, params?: any): string {
     })
   })
 
-  console.log(parts)
-
   //拼接url
   let serializedParams = parts.join('&')
   if (serializedParams) {

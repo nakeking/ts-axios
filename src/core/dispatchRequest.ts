@@ -3,7 +3,7 @@ import { AxiosRequestConfig, AxiosPromise } from '../types'
 
 import { buildURL } from '../helpers/url'
 import { transFormRequest } from '../helpers/data'
-import { processHeaders } from '../helpers/headers'
+import { flattenHeaders, processHeaders } from '../helpers/headers'
 
 export function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
@@ -18,6 +18,7 @@ function processConfig(config: AxiosRequestConfig): void {
   config.url = transFormURL(config)
   config.headers = transFormHeaders(config)
   config.data = transFormRequestData(config)
+  config.headers = flattenHeaders(config.headers, config.method!)
 }
 
 /**
