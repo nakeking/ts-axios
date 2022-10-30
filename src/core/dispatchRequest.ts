@@ -6,6 +6,7 @@ import { transFormRequest } from '../helpers/data'
 import { flattenHeaders, processHeaders } from '../helpers/headers'
 
 export function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
+  throwIfCancellactionRequested(config)
   processConfig(config)
   return xhr(config)
 }
@@ -47,4 +48,10 @@ function transFormRequestData(config: AxiosRequestConfig): any {
 function transFormHeaders(config: AxiosRequestConfig): any {
   let { headers = {}, data } = config
   return processHeaders(headers, data)
+}
+
+function throwIfCancellactionRequested(config: AxiosRequestConfig): void {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested()
+  }
 }

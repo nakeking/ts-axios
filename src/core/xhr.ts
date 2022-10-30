@@ -5,14 +5,12 @@ import { createError } from '../helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
-    const { data = null, url, method = 'get', headers, timeout, responseType } = config
-
+    const { data = null, url, method = 'get', headers, timeout, responseType, cancelToken } = config
     const request = new XMLHttpRequest()
 
     if (timeout) {
       request.timeout = timeout
     }
-
     if (responseType) {
       request.responseType = responseType
     }
@@ -67,6 +65,16 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         request.setRequestHeader(name, headers[name])
       }
     })
+
+    /**
+     * 取消请求
+     */
+    if (cancelToken) {
+      cancelToken.promise.then(reason => {
+        request.abort()
+        reject(reason)
+      })
+    }
 
     request.send(data)
 
