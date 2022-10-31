@@ -129,6 +129,7 @@
     "webpack-hot-middleware": "^2.25.2"
   },
   "dependencies": {
-    "@types/estree": "^0.0.50"
+    "@types/estree": "^0.0.50",
+    "cookie-parser": "^1.4.6"
   }
 }

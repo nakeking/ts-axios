@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-// const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 // const mutipart = require('connect-multiparty')
 // const atob = require('atob')
 const webpack = require('webpack')
@@ -9,7 +9,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
 const path = require('path')
 
-// require('./server2')
+require('./server2')
 
 const app = express()
 const complier = webpack(WebpackConfig)
@@ -34,9 +34,9 @@ app.use(express.static(__dirname))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 /** 
-    app.use(cookieParser())
 
     // 用于将文件上传到指定文件
     app.use(mutipart({
@@ -59,6 +59,8 @@ registerInterceptorRouter()
 registerConfigRouter()
 
 registerCancelRouter()
+
+registerMoreRouter()
 
 app.use(router)
 
@@ -173,5 +175,11 @@ function registerCancelRouter() {
 
   router.post('/cancel/post', function(req, res) {
     res.json(req.body)
+  })
+}
+
+function registerMoreRouter() {
+  router.get('/more/get', function(req, res) {
+    res.json(req.cookies)
   })
 }

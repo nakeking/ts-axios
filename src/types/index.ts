@@ -29,6 +29,7 @@ export interface AxiosRequestConfig {
   //responseType 服务器响应数据类型
   responseType?: XMLHttpRequestResponseType
   cancelToken?: CancelToken
+  withCredentials?: boolean
 
   [protName: string]: any
 }
