@@ -185,4 +185,9 @@ function registerMoreRouter() {
     console.log(req.body, req.files)
     res.json('upload success')
   })
+
+  router.get('/more/304', function(req, res) {
+    res.status(304)
+    res.end()
+  })
 }
