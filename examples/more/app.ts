@@ -95,3 +95,11 @@ axios.get('/more/304', {
 }).catch(err => {
     console.log(err.message)
 })
+
+const instance3 = axios.create({
+    baseURL: 'https://gimg2.baidu.com/image_search/'
+})
+
+instance3.get('src=http%3A%2F%2Fup.enterdesk.com%2Fphoto%2F2012-3-2%2Fenterdesk.com-B526ECADD33DBD367676A93E051BA1EC.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669880673&t=93a2823ebbede6d604cd6af8ec3df9be')
+
+instance3.get('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fphoto%2F2012-3-2%2Fenterdesk.com-B526ECADD33DBD367676A93E051BA1EC.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1669880673&t=93a2823ebbede6d604cd6af8ec3df9be')
