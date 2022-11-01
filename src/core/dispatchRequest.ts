@@ -28,8 +28,8 @@ function processConfig(config: AxiosRequestConfig): void {
  * @returns
  */
 function transFormURL(config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return buildURL(url!, params)
+  const { url, params, paramsSerializer } = config
+  return buildURL(url!, params, paramsSerializer)
 }
 
 /**

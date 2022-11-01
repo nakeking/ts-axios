@@ -1,4 +1,4 @@
-import { isDate, isObject } from './util'
+import { isDate, isObject, isURLSearchParams } from './util'
 
 function encode(val: string): string {
   return encodeURIComponent(val)
@@ -11,43 +11,56 @@ function encode(val: string): string {
     .replace(/%5D/gi, ']')
 }
 
-export function buildURL(url: string, params?: any): string {
+export function buildURL(
+  url: string,
+  params?: any,
+  paramsSerializer?: (params: any) => string
+): string {
   if (!params) {
     return url
   }
 
-  // `${key}=${val}`[]
-  const parts: string[] = []
-  Object.keys(params).forEach(key => {
-    const val = params[key]
+  let serializedParams
 
-    //判断为空
-    if (val === null || typeof val === 'undefined') {
-      return
-    }
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params)
+  } else if (isURLSearchParams(params)) {
+    serializedParams = params.toString()
+  } else {
+    // `${key}=${val}`[]
+    const parts: string[] = []
+    Object.keys(params).forEach(key => {
+      const val = params[key]
 
-    //判断数组
-    let values = []
-    if (Array.isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      values = [val]
-    }
-
-    values.forEach(val => {
-      if (isDate(val)) {
-        val = val.toISOString()
-      } else if (isObject(val)) {
-        val = JSON.stringify(val)
+      //判断为空
+      if (val === null || typeof val === 'undefined') {
+        return
       }
 
-      parts.push(`${encode(key)}=${encode(val)}`)
-    })
-  })
+      //判断数组
+      let values = []
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        values = [val]
+      }
 
-  //拼接url
-  let serializedParams = parts.join('&')
+      values.forEach(val => {
+        if (isDate(val)) {
+          val = val.toISOString()
+        } else if (isObject(val)) {
+          val = JSON.stringify(val)
+        }
+
+        parts.push(`${encode(key)}=${encode(val)}`)
+      })
+    })
+
+    //拼接url
+    serializedParams = parts.join('&')
+  }
+
   if (serializedParams) {
     const markIndex = url.indexOf('#')
 
