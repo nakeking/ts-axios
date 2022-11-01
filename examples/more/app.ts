@@ -76,6 +76,6 @@ uploadEl?.addEventListener('click', evt => {
     if(fileEl.files) {
         data.append('file', fileEl.files[0])
 
-        instance.post('/more/upload', data)
+        instance2.post('/more/upload', data)
     }
 })
